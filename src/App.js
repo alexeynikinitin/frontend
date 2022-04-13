@@ -2,13 +2,13 @@ import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 
 function App() {
-
+  const baseURL = "https://safe-retreat-90946.herokuapp.com"
   const userNameRef = useRef(null)
 
   const [users, setUsers] = useState([])
 
   const getUsers = () => {
-    axios.get(`http://localhost:7542/users` + window.location.search)
+    axios.get(baseURL + `/users` + window.location.search)
       .then((res) => {
         setUsers(res.data)
       })
@@ -22,14 +22,14 @@ function App() {
   };
 
   const deleteUser = (id) => {
-    axios.delete(`http://localhost:7542/users/${id}`)
+    axios.delete(baseURL + `/users/${id}`)
       .then((res) => {
         getUsers()
       })
   }
 
   const updateUser = (id, name) => {
-    axios.put(`http://localhost:7542/users`, {id, name})
+    axios.put(baseURL + `/users`, {id, name})
       .then((res) => {
         getUsers()
       })
